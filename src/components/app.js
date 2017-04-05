@@ -4,7 +4,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        Welcome to the blog app
+        <h1>Welcome to the blog app</h1>
         {this.props.children}
       </div>
     );
