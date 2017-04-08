@@ -4,8 +4,11 @@ import { reduxForm } from "redux-form";
 
 class PostsNew extends Component {
   render() {
+
+    const { fields: { title, categories, content }, handleSubmit } = this.props;  // given to us by redux-form
+
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <h3>Create a new Post</h3>
         <div className="form-group">
           <label>Title</label>
@@ -25,6 +28,7 @@ class PostsNew extends Component {
   }
 }
 
+// note reduxForm is like connect(), which connects / wire up things to the Component
 export default reduxForm({
   form: "PostsNewForm", // in state, it will be form.PostsNewForm and see the line below
   fields: ["title", "categories", "content"]  // in state, it will be form.PostsNewForm.title, etc
