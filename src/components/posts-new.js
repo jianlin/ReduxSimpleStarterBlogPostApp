@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { reduxForm } from "redux-form";
 import { createPost } from "../actions/index";
+import { Link } from "react-router";
 
 
 class PostsNew extends Component {
@@ -12,7 +13,7 @@ class PostsNew extends Component {
     console.log(title);
 
     return (
-      <form onSubmit={handleSubmit(this.props.createPost)}>
+      <form onSubmit={handleSubmit(this.props.createPost)} className="new-post-form">
         <h3>Create a new Post</h3>
         <div className={`form-group ${title.touched && title.invalid ? "has-danger" : ""}`}>
           <label>Title</label>
@@ -39,6 +40,9 @@ class PostsNew extends Component {
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
+        <Link to="/" className="btn btn-warning cancel-button">
+          Cancel
+        </Link>
       </form>
     )
   }
@@ -58,7 +62,6 @@ function validate(values) {
   }
 
   return errors;
-
 }
 
 // note reduxForm is like connect(), which connects / wire up things to the Component
