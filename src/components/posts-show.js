@@ -1,12 +1,17 @@
 import React, { Component, PropTypes } from "react";
 import { connect } from "react-redux";
-import { fetchPost, deletePost } from "../actions/index";
+import { fetchPost, deletePost, clearPost } from "../actions/index";
 import { Link } from "react-router";
 
 class PostsShow extends Component {
   componentWillMount() {
     console.log("PostsShow mounting");
     this.props.fetchPost(this.props.params.id);
+  }
+
+  componentWillUnmount() {
+    console.log("PostsShow unmounting");
+    this.props.clearPost();
   }
 
   static contextTypes = {
@@ -26,8 +31,16 @@ class PostsShow extends Component {
     const { post } = this.props;
 
     console.log("POST IS", post)
-    if (!post) return <div>Loading...</div>;
-    else return (
+    if (!post) {
+      return (
+        <div>
+          <Link to="/">
+            Back to Index
+          </Link>
+          Loading...
+        </div>
+      );
+    } else return (
       <div>
         <Link to="/">
           Back to Index
@@ -54,4 +67,4 @@ function mapStateToProps(state) {    // HOW TO CONNECT APP STATE TO CONTAINER: m
 }
 
 
-export default connect(mapStateToProps, { fetchPost, deletePost })(PostsShow);
+export default connect(mapStateToProps, { fetchPost, deletePost, clearPost })(PostsShow);
